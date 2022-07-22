@@ -310,3 +310,11 @@ X_train.rename(columns = {before:after}, inplace = True)
 
 
 
+- feature engineering 은 그냥 feature 정보를 가지고 feature를 추가 생성 하는 것을 의미하는 거였음. (그래서 전처리 단계에 포함됨.) <br>
+- multioutput (multi label)의 경우 y끼리의 그림도 봐야함. (y끼리 플랏그리기) <br>
+    -> 평가지표(metric) rmse, mse의 경우 target값이 큰 경우도 놓치면 안됨. 그걸 얼마나 잘 예측하는지로 점수가 갈리기 때문. 따라서 mse의 경우 이상치 함부로 제거하면 안됨. <br>
+    -> 참고로 평가지표 mae의 경우는 값의 크기가 어떻든 모두 균등한 비율로 중요함. <br>
+    <br>
+- y끼리의 상관관계를 봐야함. <br>
+- 예측한 y를 가지고 다음 y를 예측하는 방법을 배워놓고 잊고있었음. <br>
+    -> 이게 y끼리의 상관관계를 보는 이유임. <br>
