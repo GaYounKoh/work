@@ -236,3 +236,30 @@ The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any
 |나 & 쓰라는 에런데 써도 안달라짐.
 
 [파이썬 실습](https://hungryap.tistory.com/69) <br>
+
+
+
+
+# 220722
+jupyter lab에서 LGBMRegressor 돌릴 때 파쳐 네임에 한글 있으면 안됨.
+XGBRegressor 돌릴 때는 X_test까지도 feature네임에 한글 있으면 안됨.
+
+```python
+from sklearn.ensemble import RandomForestRegressor # decision tree 앙상블 모델, 배깅
+Random_Forest = RandomForestRegressor()
+
+import xgboost as xgb
+XGB = xgb.XGBRegressor()
+
+import lightgbm as lgbm
+LGBM = lgbm.LGBMRegressor()
+```
+
+- 컬럼 이름 각각 바꾸기
+```python
+X_train.rename(columns = {before:after}, inplace = True)
+```
+
+
+
+
