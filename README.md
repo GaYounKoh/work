@@ -208,7 +208,7 @@ MultiOutputRegressor(lgbm.LGBMRegressor()).get_params()
 ```
 
 
-# grid_search 시
+# multi output regressor grid_search 시
 - verbose=1로 줬을 경우 제일 마지막에 나와있는 time이 총 소요시간
 - 튜닝하려고 골라놓은 각 하이퍼파라미터의 그 총 개수가 돌아가는 task 개수(??) 결정하는 게 맞음. (오늘 확실히 계산해봄.)
     - 예를 들어)
@@ -237,6 +237,53 @@ The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any
 
 [파이썬 실습](https://hungryap.tistory.com/69) <br>
 
+
+```python3
+from sklearn.multioutput import MultiOutputRegressor
+# from sklearn.ensemble import RandomForestRegressor
+import lightgbm as lgbm
+from sklearn.model_selection import GridSearchCV
+
+# seed 고정
+user_seed = 42
+random.seed(user_seed) # seed 고정
+
+param = {
+    'estimator__n_estimators': np.linspace(60, 100, 5, dtype=int),
+     'estimator__max_depth': np.linspace(5, 30, 6, dtype=int)
+}
+
+gs = GridSearchCV(estimator=MultiOutputRegressor(lgbm.LGBMRegressor()), 
+                  param_grid=param, 
+                  cv=2,
+                  scoring = 'neg_mean_squared_error',
+                  n_jobs = 16,
+                 verbose = 1)
+regr = gs.fit(X_train, Y_train)
+
+
+
+print(regr.best_score_, regr.best_params_)
+regr_model = regr.best_estimator_
+
+
+regr_model.get_params()['estimator']
+
+
+from sklearn.metrics import mean_squared_error as mse # 모델 평가 지표 scoring (mse)
+from sklearn.metrics import r2_score as r2
+Y_val_pred = regr_model.predict(X_val)
+mse(Y_val, Y_val_pred)
+
+
+Y_pred = regr_model.predict(X_test)
+# 끝
+
+```
+
+# 220721
+multioutput regressor로 한 번에 돌리기 보다는
+y 각각에 대해 따로따로 돌려서 예측 결과 따로 따로 받는 것이 더 좋을 거라는 조언을 얻음.
 
 
 
