@@ -318,3 +318,126 @@ X_train.rename(columns = {before:after}, inplace = True)
 - y끼리의 상관관계를 봐야함. <br>
 - 예측한 y를 가지고 다음 y를 예측하는 방법을 배워놓고 잊고있었음. <br>
     -> 이게 y끼리의 상관관계를 보는 이유임. <br>
+
+
+# 220726
+## 앙상블과 cv?
+[앙상블 과제하면서 알아낸 것 cv, grid_search](https://velog.io/@ann9902/%EC%95%99%EC%83%81%EB%B8%94) <br>
+
+- scaling <br>
+tree기반 모델을 사용할 때는 scaling을 하지 않는다. <br>
+그리고 scaling은 회귀에서도 하지 않는다는걸 어디에선가 들음. <br>
+그러나 데이터 간의 거리가 매우 중요한 knn 같은 모델은 scaling에 민감. <br>
+
+- one hot encoding <br>
+`one hot encoding`은 범주 개수 만큼 피쳐를 생성하는 방법... -> 분류할 때 쓰는.. <br>
+
+- 변수 선택 <br>
+새로운 변수를 만드는 것이 아니라 원래 있는 변수 중에서 중요한 것만 선택하는 것으로 <br>
+sklearn의 `SelectKBest`를 이욯하면 편하다. <br>
+
+[cross validation을 하는 이유](https://velog.io/@skkumin/%EA%B5%90%EC%B0%A8-%EA%B2%80%EC%A6%9DCross-Validation) <br>
+
+고정된 test set을 가지고 모델의 성능을 확인하고 파라미터를 수정하는 과정을 반복하면 결국 고정된 test data에 overfitting 발생 <br>
+이러한 문제를 해결하기 위해 cross_validation을 이용. <br>
+모든데이터가 쓰이기 때문에 데이터의 수가 적을때도 사용. <br>
+
+
+[cv 방법들 설명 1](https://bluenoa.tistory.com/55) <br>
+[2](https://kimdingko-world.tistory.com/167) <br>
+[cross_val_scroe 사용법, 교차 검증을 간단하게](https://coding-potato.tistory.com/m/15) <br>
+** estimator가 classifier 종류이면 내부적으로 stratified KFold 로 진행 <br>
+[cv](https://aimb.tistory.com/138) 
+모델이 새로운 데이터에 대해 어떻게 수행하는지 평가할 수 있는 기회를 잃게 된다. 이를 "data leakage"
+[neg_mean_squared_error와 cv](https://thebook.io/007017/part02/ch05/05/01-03/)<br>
+
+
+
+## [앙상블 모형 이론 설명 good](https://velog.io/@changhtun1/ensemble) <br>
+
+
+[LGBM 성능 단번에 높이기](https://coding-potato.tistory.com/m/16) <br>
+
+* get_clf_eval : 모델 평가 <br>
+```python
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+
+def get_clf_eval(y_test, pred=None, pred_proba=None):
+    print('오차행렬 \n', confusion_matrix(y_test, pred))
+    print('정확도 :', accuracy_score(y_test, pred))
+    print('정밀도 : ',precision_score(y_test, pred))
+    print('재현율 :', recall_score(y_test, pred))
+    print('f1 score :', f1_score(y_test, pred))
+    print('roc auc score :', roc_auc_score(y_test, pred_proba))
+
+# 레이블 값이 극도로 불균형한 분포인 데이터의 경우 boost_from_average = True 값은 재현율과 roc_auc_score를 매우 저하시키므로
+# 분류 지도학습 시 레이블 값이 극도로 불균형한 분포를 띄는 경우 LGBMClassifier의 파라미터 중 boost_from_average=False로 설정해주어야 함.
+```
+<br>
+[스태킹 앙상블](https://hwi-doc.tistory.com/entry/%EC%8A%A4%ED%83%9C%ED%82%B9Stacking-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC) <br>
+스태킹: 여러 가지 모델들의 예측값을 최종 모델의 학습 데이터로 사용하는 예측하는 방법 <br>
+
+## 사용할 방법 정리
+1. 일단 데이터에 대한 정리
+- 정형
+- multi_output (target이 무려 14개)
+- 비식별 data, 그러나 data의 각 feature에 대한 정보는 제공
+
+2. 문제 정의
+- 회귀
+- 지도학습
+
+3. 사용한 방법 정리
+- `y 한 번에 예측`
+    - multioutputregressor를 사용해봄 (성능이 그렇게 좋게 나오지는 않았음.)
+- `y 각각 예측`
+    - 피쳐 새로 생성 후 새로 만든 것만 사용 (만드는데 사용했다면 지움.) (feature engineering)
+    - 피쳐 새로 생성 후 새로 만든 것도 사용 (기존 data 함께 사용.) (feature engineering)
+        - y 각각에 대해 서로 상관이 있다면 하나 예측 후 다음 꺼 예측 시 feature로 사용하여 진행
+        - x 중에 값이 계속 같은게 있다면 학습에 사용하지 않는다. (위와 동시에 진행)
+        - 특정 y 하나에 대한 모델을 만들고 valid로 검증을 하고, 예측하는걸 하나의 프로세스로 진행
+
+
+-----
+- train_test_split의 인자에 대해 <br>
+X, y, test_size = 0.8, shuffle = True <br>
+test_size : Train에 대한 test 혹은 valid의 값의 개수의 비율
+shuffle : train을 섞어서 나눌지 그냥 나눌지
+
+** train data set과 test data set이 애초에 과거 data 대 최근 data 이런 식이라면 validation data set을 만들 때 shuffle을 하지 않기로 한다.
+
+
+
+
+grid search로 하이퍼파라미터 튜닝 후 각종 확인
+```python
+gs.cv_results_.keys()
+gs.best_estimator_
+f'최고 점수: {gs.best_score_}'
+f'최적 하이퍼 파라미터: {gs.best_params_}'
+model.get_params() # 내가 설정하지 않는 hp에대해서까지도 보여줌. 쓸데없이 길다.
+model.get_params # 하면 내가 설정한 hyperparams 범위에 대해서만 어떤 걸로 돌아갔는지를 보여줌.
+
+# best_params_는 gs에서만 쓸 수 있음. 개별 모델에 대해서는 쓸 수 없는 모듈임.
+
+```
+
+```python
+import sklearn
+sorted(sklearn.metrics.SCORERS.keys())
+# 평가방식들 보는 코드
+```
+
+
+회사 주피터 랩 n_jobs = 16정도로 진행할 것. 내부 cpu 개수에 따라 조정해놨던 것
+
+
+
+## 과제 생성 및 ...
+가장 기본 ensemble: 제일 잘 나온 것의 예측값으로 평균
+
+- 과제
+양재 AI hub로 데이터 셋으로 대회 제작 및 baseline 진행 <br>
+data : train, test로 나누기 <br>
+
+[read_excel 및 시트 지정 가능, 예제 코드](https://velog.io/@inhwa1025/Python-pandas%EB%A1%9C-exel-%ED%8C%8C%EC%9D%BC-%EC%9D%BD%EA%B8%B0)
