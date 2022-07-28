@@ -436,8 +436,72 @@ sorted(sklearn.metrics.SCORERS.keys())
 ## 과제 생성 및 ...
 가장 기본 ensemble: 제일 잘 나온 것의 예측값으로 평균
 
-- 과제
+- 과제 (to 220728 목)
 양재 AI hub로 데이터 셋으로 대회 제작 및 baseline 진행 <br>
 data : train, test로 나누기 <br>
 
 [read_excel 및 시트 지정 가능, 예제 코드](https://velog.io/@inhwa1025/Python-pandas%EB%A1%9C-exel-%ED%8C%8C%EC%9D%BC-%EC%9D%BD%EA%B8%B0)
+
+
+# 220728
+- 유니크한 멀티인덱스 받는 코드(multi index)
+```python
+list(data[['호선', '역번호', '역명']].value_counts().index.sort_values('호선')[0].unique())
+```
+
+- append와 extend의 차이
+```python
+li1 = [2]
+li2 = [1,2]
+li3 = [2,[3,4]]
+li1.append(li2)
+li1.append(li3) # inplace = True
+li1
+
+li1 = [2]
+li2 = [1,2]
+li3 = [2,[3,4]]
+li1.extend(li2)
+li1.extend(li3) # inplace = True
+li1
+
+li1 = [2]
+li2 = [1,2]
+li3 = [2,[3,4]]
+[li1, li2, li3] # inplace = False
+
+li1 = [2]
+li2 = [1,2]
+li3 = [2,[3,4]]
+li1+li2+li3 # inplace = False
+```
+
+결과 <br>
+```
+[2, [1, 2], [2, [3, 4]]]
+[2, 1, 2, 2, [3, 4]]
+[[2], [1, 2], [2, [3, 4]]]
+[2, 1, 2, 2, [3, 4]]
+```
+
+
+- df의 틀을 다 짜놓고 값을 채워나가는 것은 사실상 불가능. <br>
+한 row씩 작성해서 이어붙이는 방법밖에 없음. <br>
+그것보다는 list로 한 번에 만들어서 한 번에 df화 시키는게 더 빠름 <br>
+```python
+# df 생성 test cell
+
+import random
+# 빈 DataFrame 생성하기
+df = pd.DataFrame(columns=['idx', 'number'])
+for idx in range(1, 11):
+    # 1과 100  사이의 random 한 값 생성하기
+    number = random.randint(1, 101)
+    # DataFrame에 특정 정보를 이용하여 data 채우기
+    df = df.append(pd.DataFrame([[idx, number]], columns=['idx', 'number']), ignore_index=True)
+    df
+    break
+    '#--------------------------'
+df.set_index('idx', inplace=True)
+df
+```
