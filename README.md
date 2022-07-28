@@ -444,7 +444,7 @@ data : train, test로 나누기 <br>
 
 
 # 220728
-- 유니크한 멀티인덱스 받는 코드(multi index)
+- df의 유니크한 멀티인덱스 받는 코드(multi index)
 ```python
 list(data[['호선', '역번호', '역명']].value_counts().index.sort_values('호선')[0].unique())
 ```
@@ -488,6 +488,8 @@ li1+li2+li3 # inplace = False
 - df의 틀을 다 짜놓고 값을 채워나가는 것은 사실상 불가능. <br>
 한 row씩 작성해서 이어붙이는 방법밖에 없음. <br>
 그것보다는 list로 한 번에 만들어서 한 번에 df화 시키는게 더 빠름 <br>
+[ref 빈 df 만들어서 fot문으로 row 채우기](https://shydev.tistory.com/29) <br>
+[하지 말아야 할 것들](http://daplus.net/python-%EB%B9%88-pandas-dataframe%EC%9D%84-%EB%A7%8C%EB%93%A0-%EB%8B%A4%EC%9D%8C-%EC%B1%84%EC%9A%B0%EC%8B%9C%EA%B2%A0%EC%8A%B5%EB%8B%88%EA%B9%8C/) <br>
 ```python
 # df 생성 test cell
 
@@ -505,3 +507,84 @@ for idx in range(1, 11):
 df.set_index('idx', inplace=True)
 df
 ```
+
+[.to_dataframe()](https://docs.xarray.dev/en/stable/generated/xarray.Dataset.to_dataframe.html) <br>
+```python
+import numpy as np
+import pandas as pd
+(np.array).to_dataframe
+```
+
+
+# dataset 생성 flow
+
+0. 사용할 모든 df의 column 등의 형태와 dtype들을 통일시켜준다.
+1. id가 될 수 있는 columns의 value들로 리스트를 만든다
+    - `날짜` 리스트 (`datetime` 모듈을 이용해 2021-07-01 ~ 2022-05-31까지 빈날짜 없이.)
+    - `호선, 역번호, 역명` 리스트
+    - `구분` 리스트
+    - `승객유형` 리스트
+
+2. 만든 리스트로 조합을 만든다. (`itertools` 모듈의 `product` 함수를 이용한다.)
+    - [itertools](https://ourcstory.tistory.com/414) <br>
+        - `product` : 2개 이상의 리스트의 value들의 조합 (리스트 별로 꺼내서 조합을 만듦.)
+        - `permutations` : 1개 이상의 리스트의 value들의 조합 (리스트들을 하나로 합쳐서 아무 value 랜덤으로 n개 뽑아서 조합을 만듦.)
+        - `combinations` : permu와 동일, 그러나 순서가 바뀌어도 구성이 같으면 같은 조합으로 인식하여 추가 생성하지 않음.
+
+3. 조합은 [mainid]가 된다. 조합의 개수만큼 row가 나와야한다.
+4. 기존에 만들어둔 data df와 노인 df, 그리고 아직 만들지 않은 승객유형별21 df, 승객유형별22 df를 합쳐서 `alldf.csv`로 저장한다.
+5. alldf.csv를 readlines로 불러와 이중리스트 형태로 `alllines` 변수에 저장한다.
+6. alldf.csv를 readlines로 불러와 df의 id가 되는 부분을 슬라이싱하여 이중리스트 형태로 `isinid` 변수에 저장한다. (이 때 `alllines`와 `isinid`는 동일한 forloop에서 돌아가기 때문에 순서가 같으므로 index를 사용할 수 있다.)
+
+
+7. `finlst`라는 이름의 공리스트를 만들고
+8. [mainid]의 길이만큼 forloop을 돌리면서 `isinid`를 사용해 isinid에 있는지 여부 검사를 통해 <br>
+    a. 있다면, 해당 loop에서의 mainid의 `isinid`에서의 위치로 `alllines`의 값을 인덱싱하여 <br>
+    b. 없다면, 해당 loop에서의 mainid + [0]\*len(시간대)를 하여
+
+9. `finlst`에 하나씩 삽입한다.
+
+- -------------------- 여기까지 하고 저장하면 시간대가 승객별로 구분되지 않은 df가 나옴.
+
+10. 일단 시간대를 리스트로 만들어 저장해놓은 변수 `col4findf`를 `finlst` 앞에 더하고 with open문을 사용하여 forloop으로 각 list를 str형으로 만들어 `findf.csv`로 <b>저장</b>한다.
+
+11. target열을 만들어야 하므로 시간대가 승객별로 구분되지 않은 df인 `findf.csv`를 건들어서 승객유형별 시간대를 옆으로 따로 빼도록 한다.
+    - 다음은 승객유형이 노인일 때의 시간대를 뽑는 예시 코드이다. <br>
+    이렇게 뽑은 각 승객 유형별 df를 각각의 변수에 저장해놨다가 한 번에 옆으로 붙여주도록 한다. <br>
+
+        ```python
+        fin = pd.read_csv('findf.csv')
+        시간대 = ['06시이전', '06시-07시', '07시-08시',
+        '08시-09시', '09시-10시', '10시-11시', '11시-12시', '12시-13시', '13시-14시',
+        '14시-15시', '15시-16시', '16시-17시', '17시-18시', '18시-19시', '19시-20시',
+        '20시-21시', '21시-22시', '22시-23시', '23시이후']
+        tp = list(fin.승객유형.unique()) # 여기에서 총은 빼고, 진행하고, 나중에 총까지의 열 뒤에 나머지를 이어붙여주도록 한다.
+        del(tp[tp.index('총')])
+
+
+        for i in tp: # loop는 유형 별로 돌아간다.
+            globals()[f'{i}시간대df'] = fin[fin['승객유형']==i][시간대]
+
+
+
+
+        
+        ```
+
+
+
+```python
+li = ['l','d','s','a']
+','.join(li)
+```
+
+```
+'l,d,s,a'
+```
+
+
+### 리스트보다 array가 더 빠르다.
+
+
+[.isocalendar()](https://codechacha.com/ko/python-how-to-get-which-weeks/)
+[망할 파이썬 문자열](https://www.delftstack.com/ko/howto/python/how-to-convert-string-to-datetime/)
