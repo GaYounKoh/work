@@ -190,11 +190,17 @@ def build_model(): 동일한 모델을 여러 번 생성할 것이므로 함수�
 [파이프라인 생성하는 일련의 과정 보여줌. 따라해보기](https://guru.tistory.com/50) <br>
 
 
-### 모델 평가지표
+### [모델 평가지표](https://scikit-learn.org/stable/modules/model_evaluation.html) - metrics
 ```python
 from sklearn.metrics import mean_squared_error as mse # 모델 평가 지표 scoring (mse)
 from sklearn.metrics import r2_score as r2
 mse(정답, 예측)
+
+# rmse
+mse(정답, 예측, squared=False)
+
+# multioutput 시 col 각각의 rmse 점수
+mse(정답, 예측, multioutput='raw_values', squared=False)
 ```
 
 
@@ -206,6 +212,82 @@ from sklearn.multioutput import MultiOutputRegressor
 import lightgbm as lgbm
 MultiOutputRegressor(lgbm.LGBMRegressor()).get_params()
 ```
+
+
+```python
+import random
+from sklearn.multioutput import MultiOutputRegressor
+from sklearn.ensemble import RandomForestRegressor
+# RandomForestRegressor().get_params(deep = True)
+
+# seed 고정
+user_seed = 42
+random.seed(user_seed) # seed 고정
+
+regr = MultiOutputRegressor(RandomForestRegressor(random_state=user_seed, n_jobs=16)).fit(X_train, Y_train) # verbose 너무 시끄러워서 끔.
+Y_pred = regr.predict(X_test)
+
+Y_pred
+
+# 평가
+from sklearn.metrics import mean_squared_error as mse # 모델 평가 지표 scoring (mse)
+from sklearn.metrics import r2_score as r2
+# mse(Y_test, Y_pred, multioutput='raw_values', squared=False) # rmse
+mse(Y_test, Y_pred, squared=False) # rmse
+r2(Y_test, Y_pred)
+```
+
+```python
+import random
+from sklearn.multioutput import MultiOutputRegressor
+import xgboost as xgb
+XGB = xgb.XGBRegressor(random_state=user_seed, n_jobs=16)
+# XGB.get_params(deep = True)
+
+# seed 고정
+user_seed = 42
+random.seed(user_seed) # seed 고정
+
+regr = MultiOutputRegressor(XGB).fit(X_train, Y_train)
+Y_pred = regr.predict(X_test)
+
+Y_pred
+
+
+# 평가
+from sklearn.metrics import mean_squared_error as mse # 모델 평가 지표 scoring (mse)
+from sklearn.metrics import r2_score as r2
+# mse(Y_test, Y_pred, multioutput='raw_values', squared=False) # rmse
+mse(Y_test, Y_pred, squared=False) # rmse : 
+r2(Y_test, Y_pred) # : 
+```
+
+
+```python
+from sklearn.multioutput import MultiOutputRegressor
+import random
+import lightgbm as lgbm
+# MultiOutputRegressor(lgbm.LGBMRegressor()).get_params()
+
+# seed 고정
+user_seed = 42
+random.seed(user_seed) # seed 고정
+
+regr = MultiOutputRegressor(lgbm.LGBMRegressor(random_state=user_seed)).fit(X_train, Y_train)
+Y_pred = regr.predict(X_test)
+
+Y_pred
+
+
+# 평가
+from sklearn.metrics import mean_squared_error as mse # 모델 평가 지표 scoring (mse)
+from sklearn.metrics import r2_score as r2
+# mse(Y_test, Y_pred, multioutput='raw_values', squared=False) # rmse
+mse(Y_test, Y_pred, squared=False) # rmse (계절, 월 추가) : 
+r2(Y_test, Y_pred) # (계절, 월 추가) : 
+```
+
+
 
 
 # multi output regressor grid_search 시
@@ -586,5 +668,27 @@ li = ['l','d','s','a']
 ### 리스트보다 array가 더 빠르다.
 
 
-[.isocalendar()](https://codechacha.com/ko/python-how-to-get-which-weeks/)
-[망할 파이썬 문자열](https://www.delftstack.com/ko/howto/python/how-to-convert-string-to-datetime/)
+[.isocalendar()](https://codechacha.com/ko/python-how-to-get-which-weeks/) <br>
+[망할 파이썬 문자열](https://www.delftstack.com/ko/howto/python/how-to-convert-string-to-datetime/) <br>
+
+
+
+# 220729
+[파이썬 튜플이 value인 리스트 정렬](https://hansuho113.tistory.com/28) <br>
+[파이썬 딕셔너리 합치기](https://aplab.tistory.com/entry/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%94%95%EC%85%94%EB%84%88%EB%A6%AC-%ED%95%A9%EC%B9%98%EA%B8%B0-%EC%82%AC%EC%A0%84-%EB%B3%91%ED%95%A9-%EB%B0%A9%EB%B2%95) <br>
+```python
+dic3 = {**dic1, **dic2}
+```
+
+[df drop](https://jimmy-ai.tistory.com/92) <br>
+```python
+# 열
+train.drop('역명', axis = 1, inplace = True)
+test.drop('역명', axis = 1, inplace = True)
+
+# 행
+경기인천 = list(np.where(data.자치구=='부평구')[0]) + list(np.where(data.자치구=='부천시')[0])
+data.drop(경기인천, axis = 0, inplace = True)
+```
+
+[통계청 인구이동데이터 이동 경계 기준](https://kostat.go.kr/understand/info/info_qst/2/4/index.board?bmode=read&aSeq=161803)
