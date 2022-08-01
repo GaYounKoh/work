@@ -691,4 +691,47 @@ test.drop('역명', axis = 1, inplace = True)
 data.drop(경기인천, axis = 0, inplace = True)
 ```
 
-[통계청 인구이동데이터 이동 경계 기준](https://kostat.go.kr/understand/info/info_qst/2/4/index.board?bmode=read&aSeq=161803)
+[통계청 인구이동데이터 이동 경계 기준](https://kostat.go.kr/understand/info/info_qst/2/4/index.board?bmode=read&aSeq=161803) <br>
+
+
+# 220801
+[데이콘 카메라 이미지 품질 향상 AI 경진대회 baseline 코드](https://dacon.io/competitions/official/235746/codeshare/2874?page=2&dtype=recent) <br> - 3등 기민님, 속도 개선 코드
+
+[CNN 용어들](https://jetsonaicar.tistory.com/48) <br>
+- 필터(filter) == 커널(kernel) == 가중치(weight)
+- 채널(channel) : color
+- stride(스트라이드), padding(패딩) : 커널 이동 보폭, output size 보존을 위한 방법
+- activation map(액티베이션 맵), feature map(피쳐 맵) : Conv의 결과 레이어, training이 끝난 후
+- pooling(풀링) 레이어 : 사이즈 다운
+
+[Unet](https://velog.io/@guide333/U-Net-%EC%A0%95%EB%A6%AC) <br>
+[backbone, head, neck](https://ddangjiwon.tistory.com/103) <br>
+backbone : image to feature map <br>
+neck : feature map 정제, 재구성 <br>
+head : feature map의 location 작업 수행<br>
+[백본과 알고리즘의 차이 추가 설명](https://www.inflearn.com/questions/34244) <br>
+- Q. 계속 나오는 단어들에 대한 의문 <br>
+    강의를 들으면서 알고리즘과 Backbone이 서로 어떻게 다른건지 잘 구분이 되지 않습니다. 
+
+    StackOverflow에서 찾아보니 Backbone을 아래와 같이 묘사하는 것을 확인했습니다. 
+    -  Feature Extractor 
+    -  Feature Extracting Network 
+    - Neural Network Architecture
+ 
+    그렇지만 여전히 알고리즘과 Backbone이 정확하게 어떻게 다른건지 잘 구분이 가지 않는 상황입니다. 
+
+- A.
+Feature Extractor는 일반적으로 저희가 익숙한 CNN Classification에 사용되는 네트웍 모델에서 최종 classification layer만 제거된 모델을 이용. <br>
+주요 CNN Classification 네트웍 모델인 VGGNET, INCEPTION, RESNET 등을 Feature Extractor로 이용하며, 이들 네트웍 모델에서 Fully connected Layer 부분을 제거 <br>
+원본 이미지를 feature map으로 변환하는 layer만 Object Detection 모델에서 사용 <br>
+
+- object detection : 객체 탐지 <br>
+
+[computer vision 방법론 - 데이콘 카메라 이미지 품질 향상 AI 경진대회 baseline 코드 review](https://tistory-nari.tistory.com/26) <br>
+
+[regression 모델 평가 방법](https://brunch.co.kr/@chris-song/34) <br>
+
+psnr_score : 최대 신호 대 잡음 비 <br>
+mse가 작을 수록 더 큰 psnr을 갖게 됨.
+[papers with code Image Super Resolution](https://paperswithcode.com/task/image-super-resolution) <br>
+[SRGAN 논문 정리](https://dydeeplearning.tistory.com/2) <br>
