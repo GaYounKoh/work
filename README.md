@@ -810,3 +810,39 @@ for i in file_list:
 [리스트 내 문자 포함 확인](https://ddolcat.tistory.com/676) <br>
 [map함수를 사용하는 것과 아닌 것의 차이](https://blockdmask.tistory.com/531) <br>
 [lambda 표현식에 조건부 표현식 사용하기](https://dojang.io/mod/page/view.php?id=2360) <br>
+<br>
+
+[python re library, 정규표현식 regular expression](https://jjuha-dev.tistory.com/entry/Python-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D-resub%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%AC%B8%EC%9E%90%EC%97%B4-%EC%B9%98%ED%99%98%ED%95%98%EA%B8%B0) <br>
+[numpy concatenate, 그냥 axis대로 이어붙이기](https://engineer-mole.tistory.com/234) <br>
+
+- `np.where` 사용법
+```python
+# g_data가 list인 경우에 ndarray로 바꿔서 진행 가능
+np.where(np.array(g_data)=='문자열')
+
+# g_data가 ndarray인 경우에 바로 가능
+np.where(g_data == 'V2000')
+```
+
+- ndarray또는 df의 특정 열에 대해 값이 있는지 여부를 확인하는 `.isin()` 사용법
+일단 이건 아마도 DSML readme에 자세히 나와있을 것임. (앗, 없음...;;; 어디에도 없음.) <br>
+괄호 안에 문자열이든 숫자든 아무튼 `찾고 싶은 값`을 그냥 넣을 경우 list로 안받아졌다고 에러가 난다. <br>
+```python
+tmp_g[tmp_g.isin(['V2000'])]
+tmp_g[tmp_g.isin([값1, 값2])]
+```
+
+```python
+## 혹시 찾은 그 값이 들어있는 행을 지우고 싶다면
+df.drop(df[df['Mary'].isin([68, 70])].index, inplace = True) # df의 Mary 열에 68, 70이 있는 행은 다 지운다.
+df_del = df.reset_index(drop = True)
+
+
+### 이하의 한 줄은 위의 drop의 일련의 과정과 같은 결과를 낸다.
+df_del = df.drop(df[df['Mary'].isin([68, 70])].index).reset_index(drop = True)
+```
+이런 식으로 사용하도록 하자.
+
+
+- 그림이 아니어도 CNN을 사용할 수 있다. <br>
+- 💛💛💛*** 다시 말하지만 모델 층 쌓는 게 딥러닝이다. <br>
