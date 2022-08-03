@@ -803,3 +803,10 @@ for i in file_list:
         i.index('.')
 # [0, None, None, None, None, None, 14, 14, 11, 19, 15, 33, 16, 23]
 ```
+
+
+[os](https://bskyvision.com/762) <br>
+[glob](https://wikidocs.net/83) <br>
+[리스트 내 문자 포함 확인](https://ddolcat.tistory.com/676) <br>
+[map함수를 사용하는 것과 아닌 것의 차이](https://blockdmask.tistory.com/531) <br>
+[lambda 표현식에 조건부 표현식 사용하기](https://dojang.io/mod/page/view.php?id=2360) <br>
