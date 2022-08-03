@@ -735,3 +735,71 @@ psnr_score : 최대 신호 대 잡음 비 <br>
 mse가 작을 수록 더 큰 psnr을 갖게 됨.
 [papers with code Image Super Resolution](https://paperswithcode.com/task/image-super-resolution) <br>
 [SRGAN 논문 정리](https://dydeeplearning.tistory.com/2) <br>
+
+
+# 220802-3
+`excel to csv.ipynb` <br>
+
+sheet_name = number, df mapping 등... <br>
+
+
+# 220803
+`디렉토리 내 파일 자동호출.ipynb`
+glob과 os 라이브러리
+
+
+
+\는 에러가 남
+```python
+'d\d\f'
+```
+```
+출력결과
+'d\\d\x0c'
+```
+
+```python
+path = 'C:\Users\uuuu\Downloads\'
+```
+```
+출력 에러
+(unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape
+
+또는
+EOL while scanning string literal
+```
+
+
+list mapping, lambda 내 if 문 등... <br>
+
+df랑 list는 mapping 방식이 다름.
+
+```python
+## df의 경우
+df[열].map(lambda x : 인자 x를 포함한 함수)
+
+# 또는
+df[열].map({'기존': '바꾸고싶은 내용', ...})
+
+
+## list의 경우
+list(map(lambda x : 인자 x를 포함한 함수 if ... else ..., list_name))
+# if 문을 쓸거면 else는 꼭 써줘야 함. 단, pass, continue가 아닌 None 또는 그 자체를 반환하는 식으로
+```
+
+```python
+## 아래 함수를 작성했을 때, 함수 아래 <4개 식과 for문>은 모두 같은 값을 반환함.
+def index_p(x):
+    if '.' in x:
+        return x.index('.')
+
+list(map(index_p, file_list))
+list(map(lambda x: index_p(x), file_list))
+list(map(lambda x: x.index('.') if '.' in x else print('None'), file_list))
+list(map(lambda x: x.index('.') if '.' in x else None, file_list))
+
+for i in file_list:
+    if '.' in i:
+        i.index('.')
+# [0, None, None, None, None, None, 14, 14, 11, 19, 15, 33, 16, 23]
+```
