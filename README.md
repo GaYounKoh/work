@@ -846,3 +846,8 @@ df_del = df.drop(df[df['Mary'].isin([68, 70])].index).reset_index(drop = True)
 
 - 그림이 아니어도 CNN을 사용할 수 있다. <br>
 - 💛💛💛*** 다시 말하지만 모델 층 쌓는 게 딥러닝이다. <br>
+
+
+# 220804 ~ 220805
+API Crawling, code updated <br>
+HTTP 04 error 발생 문제 -> 월요일에 운영계정으로도 에러나면 전화로 해결
