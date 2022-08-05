@@ -1,6 +1,8 @@
 # work
 internship
 
+## 회사 주피터 랩 n_jobs = 16정도로 진행할 것. 내부 cpu 개수에 따라 조정해놨던 것
+
 # file name 생성 규칙
 - [0]은 언제나 활용할 수 있는 코드
 - 나머지는 작업 할당 받은 순서
@@ -9,45 +11,27 @@ internship
 
 # 220719
 0. 인사!!!
-~~1. mac에서 vscode하는 방법 찾아야 함. (그 전에 os에 대해 고민 해봐야함. mac 너무 어려움. mac은 뭐라도 익히고 난 다음에..., 아주 기본적인 단축키 조차 못써서 답답함.)~~ 포기하고 일단 내 노트북 쓰는중.
+1. ~~mac에서 vscode하는 방법 찾아야 함. (그 전에 os에 대해 고민 해봐야함. mac 너무 어려움. mac은 뭐라도 익히고 난 다음에..., 아주 기본적인 단축키 조차 못써서 답답함.)~~ 포기하고 일단 내 노트북 쓰는중.
 2. python으로 SQL하는 코드 익히기 (불러오는 코드 정도만 익히면 판다스는 문제 없음.(? 아마도...? 설마..?))
-~~3. ip 회사 서버에 연결~~ 연결 완료!, 집에서만 쓸 수 있음
-~~4. 회사 바로 앞 아샷추의 위치를 파악해봐야함. (일단 이디야는 없음.)~~ 아이스티 사다놓음.
+3. ~~ip 회사 서버에 연결~~ 연결 완료!, 집에서만 쓸 수 있음
+4. ~~회사 바로 앞 아샷추의 위치를 파악해봐야함. (일단 이디야는 없음.)~~ 아이스티 사다놓음.
 5. 점심시간 1시간, 12:30 ~ 13:30 ☆☆☆, 샌드위치집 위치 알아두기
 6. 대회에 대해 익히기
 7. AImers는 빨리 전화해봐야할듯.
-~~8. 금요일 빨리 집~~ 일단 8시 전까지면 됨.
+8. ~~금요일 빨리 집~~ 일단 8시 전까지면 됨.
 9. team: 동하님 기민님
 
 [pymysql 사용법](https://www.fun-coding.org/mysql_basic6.html)
-[json file이 도대체 뭐죠???, vsc의 예시 사진 함께 있음.](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=demonic3540&logNo=221277604043)
-
-1) json : Java Script Object Notation <br>
-2) 단순히 데이터를 표시하는 방법 <br>
-3) json파일이 가지고 있는 데이터를 받아서 객체나 변수에 할당해서 사용하기 위함. <br>
- <br>
-4) [json의 구조] <br>
- <br>
-    1. Object (객체) <br>
-    - name/value의 순서쌍으로 set <br>
-    - {}로 정의됨. ex) {'이름':'홍길동'} <br>
- <br>
-    2. Array (배열) <br>
-    - ex) [10, 'arr', 32] <br>
- <br>
-5) json의 예 <br>
-{'이름':'홍길동', <br>
-'나이':22, <br>
-'특기':["배구","야구"]} <br>
- <br>
-6) json은 왜 쓰는가? <br>
-다른 포맷에 비래 경량화된 데이터 포맷. <br>
- <br>
-7) json parsing? <br>
-A로부터 B가 `.json` 파일을 받았다고 하면 이 파일에 담긴 data를 찾아 객체나 변수에 할당하기 위해 `.json` 파일 내에서 특정 data만을 가져와야 함. <br>
-`.json` 파일 내의 특정 data만 추출하는 것을 의미. <br>
 
 
+## [평가 metric 보는 코드]
+```python
+import sklearn
+sorted(sklearn.metrics.SCORERS.keys())
+# 평가방식들 보는 코드
+```
+
+## [pymysql]
 - cursor의 fetchall()메서드는 모든 데이터를 한 번에 클라이언트로 가져올 때 사용됨.
 - fetchone()은 한번 호출에 하나의 Row 만을 가져올 때 사용
     - fetchone()을 여러 번 호출하면, 호출 때 마다 한 Row 씩 데이타를 가져오게 된다
@@ -100,11 +84,42 @@ tmp["team_name"] = tmp["ㅊㅊ"].apply(lambda x : get_info(x, 2)) # 팀이라면
 
 tmp.drop(["ㅊㅊ"], axis = 1, inplace = True) # 사용한 데이터는 drop으로 떨구기.
 ```
+<br>
+
+## [json]
+[json file이 도대체 뭐죠???, vsc의 예시 사진 함께 있음.](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=demonic3540&logNo=221277604043)
+
+1) json : Java Script Object Notation <br>
+2) 단순히 데이터를 표시하는 방법 <br>
+3) json파일이 가지고 있는 데이터를 받아서 객체나 변수에 할당해서 사용하기 위함. <br>
+ <br>
+4) [json의 구조] <br>
+ <br>
+    1. Object (객체) <br>
+    - name/value의 순서쌍으로 set <br>
+    - { }로 정의됨. ex) {'이름':'홍길동'} <br>
+ <br>
+    2. Array (배열) <br>
+    - ex) [10, 'arr', 32] <br>
+ <br>
+5) json의 예 <br>
+```json
+{'이름':'홍길동',
+        '나이':22,
+        '특기':["배구","야구"]}
+```
+
+6) json은 왜 쓰는가? <br>
+다른 포맷에 비래 경량화된 데이터 포맷. <br>
+ <br>
+7) json parsing? <br>
+A로부터 B가 `.json` 파일을 받았다고 하면 이 파일에 담긴 data를 찾아 객체나 변수에 할당하기 위해 `.json` 파일 내에서 특정 data만을 가져와야 함. <br>
+`.json` 파일 내의 특정 data만 추출하는 것을 의미. <br>
 
 
 
 # 220720
-### error message
+## [error message]
 ```
 Expected 2D array, got 1D array instead:
 array=[val val val val val val val].
@@ -112,7 +127,7 @@ Reshape your data either using array.reshape(-1, 1) if your data has a single fe
 ```
 는 보통 X shape이 틀렸을 때 나옴.
 
-### cpu 개수 확인 방법
+## [cpu 개수 확인 코드]
 ```python
 import os
 os.cpu_count()
@@ -135,6 +150,8 @@ os.cpu_count()
 
 [train - val - test](https://modern-manual.tistory.com/19) <br>
 
+
+## [GPU 지정 코드]
 [gpu 관련](https://driz2le.tistory.com/270) <br>
 [gpu 지정 사용](https://jimmy-ai.tistory.com/121) <br>
 ```python
@@ -156,8 +173,6 @@ torch.cuda.device(0)
 
 
 
-
-
 # gpu 지정 사용 코드
 # GPU 사용을 원하는 경우
 with tf.device('/device:GPU:0'): 
@@ -169,6 +184,7 @@ with tf.device('/cpu:0'):
 ```
 
 
+## [딥러닝 층 쌓는 예시 코드]
 [딥러닝, 층 쌓는 예시 코드](https://tensorflow.blog/%EC%BC%80%EB%9D%BC%EC%8A%A4-%EB%94%A5%EB%9F%AC%EB%8B%9D/3-6-%EC%A3%BC%ED%83%9D-%EA%B0%80%EA%B2%A9-%EC%98%88%EC%B8%A1-%ED%9A%8C%EA%B7%80-%EB%AC%B8%EC%A0%9C/) <br>
 
 ```python
@@ -186,17 +202,18 @@ def build_model(): 동일한 모델을 여러 번 생성할 것이므로 함수�
 ```
 
 
-- pipeline (파이프라인)
+- pipeline (파이프라인) <br>
 [파이프라인이란?, 전처리 파이프라인 구축해보기 1](https://gogetem.tistory.com/469) <br>
 [파이프라인이란?, 전처리 파이프라인 구축해보기 2](https://rk1993.tistory.com/entry/Python-sklearnpipeline-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8Pipeline%EC%9D%B4%EB%9E%80) <br>
 
-[머신러닝 파이프라인, 머신러닝 전후 코드 차이 보여줌. 굿굿](https://study2give.tistory.com/entry/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8Pipeline) <br>
-데이터 전처리와 모델 학습, 예측까지 한번에
+    [머신러닝 파이프라인, 머신러닝 전후 코드 차이 보여줌. 굿굿](https://study2give.tistory.com/entry/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8Pipeline) <br>
+    데이터 전처리와 모델 학습, 예측까지 한번에
 
-[파이프라인 생성하는 일련의 과정 보여줌. 따라해보기](https://guru.tistory.com/50) <br>
+    [파이프라인 생성하는 일련의 과정 보여줌. 따라해보기](https://guru.tistory.com/50) <br>
 
+<br>
 
-### [모델 평가지표](https://scikit-learn.org/stable/modules/model_evaluation.html) - metrics
+## [모델 평가지표](https://scikit-learn.org/stable/modules/model_evaluation.html) - metrics
 ```python
 from sklearn.metrics import mean_squared_error as mse # 모델 평가 지표 scoring (mse)
 from sklearn.metrics import r2_score as r2
@@ -208,7 +225,7 @@ mse(정답, 예측, squared=False)
 # multioutput 시 col 각각의 rmse 점수
 mse(정답, 예측, multioutput='raw_values', squared=False)
 ```
-
+<br>
 
 ```python
 from sklearn.ensemble import RandomForestRegressor
@@ -218,7 +235,7 @@ from sklearn.multioutput import MultiOutputRegressor
 import lightgbm as lgbm
 MultiOutputRegressor(lgbm.LGBMRegressor()).get_params()
 ```
-
+<br>
 
 ```python
 import random
@@ -242,6 +259,7 @@ from sklearn.metrics import r2_score as r2
 mse(Y_test, Y_pred, squared=False) # rmse
 r2(Y_test, Y_pred)
 ```
+<br>
 
 ```python
 import random
@@ -267,7 +285,7 @@ from sklearn.metrics import r2_score as r2
 mse(Y_test, Y_pred, squared=False) # rmse : 
 r2(Y_test, Y_pred) # : 
 ```
-
+<br>
 
 ```python
 from sklearn.multioutput import MultiOutputRegressor
@@ -292,7 +310,7 @@ from sklearn.metrics import r2_score as r2
 mse(Y_test, Y_pred, squared=False) # rmse (계절, 월 추가) : 
 r2(Y_test, Y_pred) # (계절, 월 추가) : 
 ```
-
+<br>
 
 
 
@@ -317,7 +335,7 @@ r2(Y_test, Y_pred) # (계절, 월 추가) :
 [eval](https://bio-info.tistory.com/84)
 
 
-### error message
+### [error message]
 ``` python
 The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
 ```
@@ -326,7 +344,7 @@ The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any
 [파이썬 실습](https://hungryap.tistory.com/69) <br>
 
 
-```python3
+```python
 from sklearn.multioutput import MultiOutputRegressor
 # from sklearn.ensemble import RandomForestRegressor
 import lightgbm as lgbm
@@ -366,18 +384,17 @@ mse(Y_val, Y_val_pred)
 
 Y_pred = regr_model.predict(X_test)
 # 끝
-
 ```
 
 # 220721
-multioutput regressor로 한 번에 돌리기 보다는
-y 각각에 대해 따로따로 돌려서 예측 결과 따로 따로 받는 것이 더 좋을 거라는 조언을 얻음.
+multioutput regressor로 한 번에 돌리기 보다는 <br>
+y 각각에 대해 따로따로 돌려서 예측 결과 따로 따로 받는 것이 더 좋을 거라는 조언을 얻음. <br>
 
 
 
 # 220722
-jupyter lab에서 LGBMRegressor 돌릴 때 파쳐 네임에 한글 있으면 안됨.
-XGBRegressor 돌릴 때는 X_test까지도 feature네임에 한글 있으면 안됨.
+jupyter lab에서 LGBMRegressor 돌릴 때 파쳐 네임에 한글 있으면 안됨. <br>
+XGBRegressor 돌릴 때는 X_test까지도 feature네임에 한글 있으면 안됨. <br>
 
 ```python
 from sklearn.ensemble import RandomForestRegressor # decision tree 앙상블 모델, 배깅
@@ -409,7 +426,7 @@ X_train.rename(columns = {before:after}, inplace = True)
 
 
 # 220726
-## 앙상블과 cv?
+## [앙상블과 cv?]
 [앙상블 과제하면서 알아낸 것 cv, grid_search](https://velog.io/@ann9902/%EC%95%99%EC%83%81%EB%B8%94) <br>
 
 - scaling <br>
@@ -441,7 +458,7 @@ sklearn의 `SelectKBest`를 이욯하면 편하다. <br>
 
 
 
-## [앙상블 모형 이론 설명 good](https://velog.io/@changhtun1/ensemble) <br>
+## [[앙상블 모형 이론 설명 good](https://velog.io/@changhtun1/ensemble)] <br>
 
 
 [LGBM 성능 단번에 높이기](https://coding-potato.tistory.com/m/16) <br>
@@ -461,11 +478,10 @@ def get_clf_eval(y_test, pred=None, pred_proba=None):
 # 레이블 값이 극도로 불균형한 분포인 데이터의 경우 boost_from_average = True 값은 재현율과 roc_auc_score를 매우 저하시키므로
 # 분류 지도학습 시 레이블 값이 극도로 불균형한 분포를 띄는 경우 LGBMClassifier의 파라미터 중 boost_from_average=False로 설정해주어야 함.
 ```
-<br>
 [스태킹 앙상블](https://hwi-doc.tistory.com/entry/%EC%8A%A4%ED%83%9C%ED%82%B9Stacking-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC) <br>
 스태킹: 여러 가지 모델들의 예측값을 최종 모델의 학습 데이터로 사용하는 예측하는 방법 <br>
 
-## 사용할 방법 정리
+## [사용할 방법 정리]
 1. 일단 데이터에 대한 정리
 - 정형
 - multi_output (target이 무려 14개)
@@ -489,15 +505,13 @@ def get_clf_eval(y_test, pred=None, pred_proba=None):
 -----
 - train_test_split의 인자에 대해 <br>
 X, y, test_size = 0.8, shuffle = True <br>
-test_size : Train에 대한 test 혹은 valid의 값의 개수의 비율
-shuffle : train을 섞어서 나눌지 그냥 나눌지
+test_size : Train에 대한 test 혹은 valid의 값의 개수의 비율 <br>
+shuffle : train을 섞어서 나눌지 그냥 나눌지 <br>
 
-** train data set과 test data set이 애초에 과거 data 대 최근 data 이런 식이라면 validation data set을 만들 때 shuffle을 하지 않기로 한다.
+** train data set과 test data set이 애초에 과거 data 대 최근 data 이런 식이라면 validation data set을 만들 때 shuffle을 하지 않기로 한다. <br>
+<br>
 
-
-
-
-grid search로 하이퍼파라미터 튜닝 후 각종 확인
+## [grid search로 하이퍼파라미터 튜닝 후 각종 확인] <br>
 ```python
 gs.cv_results_.keys()
 gs.best_estimator_
@@ -510,34 +524,24 @@ model.get_params # 하면 내가 설정한 hyperparams 범위에 대해서만 �
 
 ```
 
-```python
-import sklearn
-sorted(sklearn.metrics.SCORERS.keys())
-# 평가방식들 보는 코드
-```
-
-
-회사 주피터 랩 n_jobs = 16정도로 진행할 것. 내부 cpu 개수에 따라 조정해놨던 것
-
-
 
 ## 과제 생성 및 ...
-가장 기본 ensemble: 제일 잘 나온 것의 예측값으로 평균
+가장 기본 ensemble: 제일 잘 나온 것의 예측값으로 평균 <br>
 
 - 과제 (to 220728 목)
 양재 AI hub로 데이터 셋으로 대회 제작 및 baseline 진행 <br>
 data : train, test로 나누기 <br>
 
-[read_excel 및 시트 지정 가능, 예제 코드](https://velog.io/@inhwa1025/Python-pandas%EB%A1%9C-exel-%ED%8C%8C%EC%9D%BC-%EC%9D%BD%EA%B8%B0)
-
+[read_excel 및 시트 지정 가능, 예제 코드](https://velog.io/@inhwa1025/Python-pandas%EB%A1%9C-exel-%ED%8C%8C%EC%9D%BC-%EC%9D%BD%EA%B8%B0) <br>
+<br>
 
 # 220728
-- df의 유니크한 멀티인덱스 받는 코드(multi index)
+- df의 유니크한 멀티인덱스 받는 코드(multi index) <br>
 ```python
 list(data[['호선', '역번호', '역명']].value_counts().index.sort_values('호선')[0].unique())
 ```
 
-- append와 extend의 차이
+- append와 extend의 차이 <br>
 ```python
 li1 = [2]
 li2 = [1,2]
@@ -545,6 +549,8 @@ li3 = [2,[3,4]]
 li1.append(li2)
 li1.append(li3) # inplace = True
 li1
+# 결과 : [2, [1, 2], [2, [3, 4]]]
+
 
 li1 = [2]
 li2 = [1,2]
@@ -552,25 +558,24 @@ li3 = [2,[3,4]]
 li1.extend(li2)
 li1.extend(li3) # inplace = True
 li1
+# 결과 : [2, 1, 2, 2, [3, 4]]
+
 
 li1 = [2]
 li2 = [1,2]
 li3 = [2,[3,4]]
 [li1, li2, li3] # inplace = False
+# 결과 : [[2], [1, 2], [2, [3, 4]]]
+
 
 li1 = [2]
 li2 = [1,2]
 li3 = [2,[3,4]]
 li1+li2+li3 # inplace = False
-```
+# 결과 : [2, 1, 2, 2, [3, 4]]
 
-결과 <br>
 ```
-[2, [1, 2], [2, [3, 4]]]
-[2, 1, 2, 2, [3, 4]]
-[[2], [1, 2], [2, [3, 4]]]
-[2, 1, 2, 2, [3, 4]]
-```
+<br>
 
 
 - df의 틀을 다 짜놓고 값을 채워나가는 것은 사실상 불가능. <br>
@@ -595,6 +600,7 @@ for idx in range(1, 11):
 df.set_index('idx', inplace=True)
 df
 ```
+<br>
 
 [.to_dataframe()](https://docs.xarray.dev/en/stable/generated/xarray.Dataset.to_dataframe.html) <br>
 ```python
@@ -602,6 +608,7 @@ import numpy as np
 import pandas as pd
 (np.array).to_dataframe
 ```
+<br>
 
 
 # dataset 생성 flow
@@ -653,30 +660,24 @@ import pandas as pd
         for i in tp: # loop는 유형 별로 돌아간다.
             globals()[f'{i}시간대df'] = fin[fin['승객유형']==i][시간대]
 
-
-
-
-        
         ```
-
+<br>
 
 
 ```python
 li = ['l','d','s','a']
 ','.join(li)
-```
 
+# 결과 : 'l,d,s,a'
 ```
-'l,d,s,a'
-```
+<br>
 
-
-### 리스트보다 array가 더 빠르다.
+### 리스트보다 array가 더 빠르다.(고 하심.)
 
 
 [.isocalendar()](https://codechacha.com/ko/python-how-to-get-which-weeks/) <br>
 [망할 파이썬 문자열](https://www.delftstack.com/ko/howto/python/how-to-convert-string-to-datetime/) <br>
-
+<br>
 
 
 # 220729
@@ -685,6 +686,7 @@ li = ['l','d','s','a']
 ```python
 dic3 = {**dic1, **dic2}
 ```
+<br>
 
 [df drop](https://jimmy-ai.tistory.com/92) <br>
 ```python
@@ -696,12 +698,13 @@ test.drop('역명', axis = 1, inplace = True)
 경기인천 = list(np.where(data.자치구=='부평구')[0]) + list(np.where(data.자치구=='부천시')[0])
 data.drop(경기인천, axis = 0, inplace = True)
 ```
+<br>
 
 [통계청 인구이동데이터 이동 경계 기준](https://kostat.go.kr/understand/info/info_qst/2/4/index.board?bmode=read&aSeq=161803) <br>
-
+<br>
 
 # 220801
-[데이콘 카메라 이미지 품질 향상 AI 경진대회 baseline 코드](https://dacon.io/competitions/official/235746/codeshare/2874?page=2&dtype=recent) <br> - 3등 기민님, 속도 개선 코드
+[데이콘 카메라 이미지 품질 향상 AI 경진대회 baseline 코드](https://dacon.io/competitions/official/235746/codeshare/2874?page=2&dtype=recent) - 3등 기민님, 속도 개선 코드 <br>
 
 [CNN 용어들](https://jetsonaicar.tistory.com/48) <br>
 - 필터(filter) == 커널(kernel) == 가중치(weight)
@@ -717,14 +720,14 @@ neck : feature map 정제, 재구성 <br>
 head : feature map의 location 작업 수행<br>
 [백본과 알고리즘의 차이 추가 설명](https://www.inflearn.com/questions/34244) <br>
 - Q. 계속 나오는 단어들에 대한 의문 <br>
-    강의를 들으면서 알고리즘과 Backbone이 서로 어떻게 다른건지 잘 구분이 되지 않습니다. 
+    강의를 들으면서 알고리즘과 Backbone이 서로 어떻게 다른건지 잘 구분이 되지 않습니다.
 
-    StackOverflow에서 찾아보니 Backbone을 아래와 같이 묘사하는 것을 확인했습니다. 
-    -  Feature Extractor 
-    -  Feature Extracting Network 
+    StackOverflow에서 찾아보니 Backbone을 아래와 같이 묘사하는 것을 확인했습니다.
+    -  Feature Extractor
+    -  Feature Extracting Network
     - Neural Network Architecture
  
-    그렇지만 여전히 알고리즘과 Backbone이 정확하게 어떻게 다른건지 잘 구분이 가지 않는 상황입니다. 
+    그렇지만 여전히 알고리즘과 Backbone이 정확하게 어떻게 다른건지 잘 구분이 가지 않는 상황입니다.
 
 - A.
 Feature Extractor는 일반적으로 저희가 익숙한 CNN Classification에 사용되는 네트웍 모델에서 최종 classification layer만 제거된 모델을 이용. <br>
@@ -747,34 +750,36 @@ mse가 작을 수록 더 큰 psnr을 갖게 됨.
 `excel to csv.ipynb` <br>
 
 sheet_name = number, df mapping 등... <br>
-
+<br>
 
 # 220803
-`디렉토리 내 파일 자동호출.ipynb`
-glob과 os 라이브러리
+`디렉토리 내 파일 자동호출.ipynb` <br>
+glob과 os 라이브러리 <br>
+<br>
 
 
-
-\는 에러가 남
+\는 에러가 남. 아래는 예시<br>
 ```python
 'd\d\f'
 ```
 ```
-출력결과
+<출력결과>
 'd\\d\x0c'
 ```
+<br>
 
 ```python
 path = 'C:\Users\uuuu\Downloads\'
 ```
 ```
-출력 에러
+<출력 에러>
 (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape
 
 또는
 EOL while scanning string literal
 ```
-
+<br>
+<br>
 
 list mapping, lambda 내 if 문 등... <br>
 
@@ -837,6 +842,7 @@ np.where(g_data == 'V2000')
 tmp_g[tmp_g.isin(['V2000'])]
 tmp_g[tmp_g.isin([값1, 값2])]
 ```
+<br>
 
 ```python
 ## 혹시 찾은 그 값이 들어있는 행을 지우고 싶다면
@@ -847,11 +853,13 @@ df_del = df.reset_index(drop = True)
 ### 이하의 한 줄은 위의 drop의 일련의 과정과 같은 결과를 낸다.
 df_del = df.drop(df[df['Mary'].isin([68, 70])].index).reset_index(drop = True)
 ```
-이런 식으로 사용하도록 하자.
+👆👆👆이런 식으로 사용하도록 하자. <br>
+<br>
 
 
 - 그림이 아니어도 CNN을 사용할 수 있다. <br>
 - 💛💛💛*** 다시 말하지만 모델 층 쌓는 게 딥러닝이다. <br>
+<br>
 
 
 # 220804 ~ 220805
