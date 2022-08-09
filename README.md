@@ -1,13 +1,52 @@
 # work
 internship
 
+## 프린트 - 220809
+위워크 홈페이지 > print/download?/os=Windows > 프린트 프로그램 설치 <br>
+키카드만 탭하면 프린트 가능함. <br>
+
 ### 회사 주피터 랩 n_jobs = 16정도로 진행할 것. 내부 cpu 개수에 따라 조정해놨던 것
 -220726
+<br>
 
 # file name 생성 규칙
 - [0]은 언제나 활용할 수 있는 코드
 - 나머지는 작업 할당 받은 순서
 - [numbering] <file을 통해 알 수 있는 것과 관련해서 지은 이름> + (앞이 인턴 폴더에 저장된 코드와 이름이 다르면 <원본 이름>) + <주최 기업>
+<br>
+
+## [try except 구문] - 220809
+- 완전 자동화를 꿈꾸는 구문임
+- 조건 없이 일단 실행하고 실행 시 오류가 나면 다음으로 넘어가는 문법. <br>
+    for문에서 try에 있는 구문을 실행했을 때 오류가 나면 except 구문에 continue 작성을 통해 다음 iter로 넘어가는 등의 처리가 가능하다. <br>
+    - 자세한 코드 예시는 새로 업로드하는 파일 ([6] API_Crawling 함수로호출_try_except 구문 + visit_kor.ipynb)을 참고하시오. <br>
+
+```python
+## 예시 1)
+## ci는 현재 경로에 없는 파일, cids 파일은 현재 경로에 존재하는 파일이다.
+import pandas as pd
+try:
+    data = pd.read_csv('ci.csv')
+except:
+    data = pd.read_csv('cids.csv')
+```
+<br>
+
+```python
+## 예시 2) 자세한 코드는 새로 업로드하는 파일 ([6] API_Crawling 함수로호출_try_except 구문 + visit_kor.ipynb)을 참고하시오.
+for enu, CID in tqdm(enumerate(cids[17004:])):
+    try:
+        tmp_df = api(CID)
+    except:
+        print(cids.index(CID))
+        continue
+        # except문에 동일한 요청이 아닌 다음 loop가 돌아야함.
+        # 그러려면 continue를 해줘야 하는데 그럼 try부터 도는데, 그게 맞나..?
+        # 말하다보니까 그게 맞다는걸 깨달음.
+    
+    ## concat & df update
+    df = pd.concat([df, tmp_df], ignore_index = True)
+```
 <br>
 
 ## [평가 metric 보는 코드] - 220726
@@ -16,6 +55,7 @@ import sklearn
 sorted(sklearn.metrics.SCORERS.keys())
 # 평가방식들 보는 코드
 ```
+<br>
 
 ## [pymysql] - 220719
 [pymysql 사용법](https://www.fun-coding.org/mysql_basic6.html)
@@ -23,7 +63,7 @@ sorted(sklearn.metrics.SCORERS.keys())
 - fetchone()은 한번 호출에 하나의 Row 만을 가져올 때 사용
     - fetchone()을 여러 번 호출하면, 호출 때 마다 한 Row 씩 데이타를 가져오게 된다
 - fetchmany(n) 메서드는 n개 만큼의 데이타를 한꺼번에 가져올 때 사용
-[fetchall() 등 pymysql에 대한 설명](http://pythonstudy.xyz/python/article/202-MySQL-%EC%BF%BC%EB%A6%AC)
+[fetchall() 등 pymysql에 대한 설명](http://pythonstudy.xyz/python/article/202-MySQL-%EC%BF%BC%EB%A6%AC) <br>
 
 ```python
 import pymysql
