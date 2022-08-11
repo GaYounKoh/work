@@ -908,3 +908,27 @@ API Crawling, code updated <br>
 HTTP 04 error 발생 문제 -> 월요일에 운영계정으로도 에러나면 전화로 해결 <br>
 
 
+# 220811
+.isin()을 통해 a.df에는 없는 b.df의 row만을 뽑으려면 <br>
+column을 특정해서 설정해줘야한다. <br>
+그러지 않으면 .isin()의 결과가 False인 것도 출력이 됨. <br>
+```python
+b_df[b_df['cid'].isin(a_df['cid'])] # isin은 column을 특정해줘야함.
+```
+<br>
+
+그리고 .isin()은 괄호 안에 값(들어있는지 확인하고 싶은 값)을 list나 array 형태로 넣어줘야함. <br>
+```python
+ex[ex.cid.isin(['1957446'])]
+```
+<br>
+
+내가 지금 하고자하는 작업은 df를 최종적으로 합쳤을 때 <br>
+cids.csv 안에 example_df.csv의 cid중 ___안들어있는게 뭔지___ 알고싶은 것임. <br>
+
+[작업 코드] <br>
+```python
+str_cid = [str(i) for i in tmp.cid] # tmp의 cid는 int, CIDs의 tmp는 str이라 형변환을 해줘야 검색이 가능함.
+CIDs[~CIDs.cid.isin(str_cid)]
+```
+<br>
