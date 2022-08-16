@@ -1,6 +1,13 @@
 # work
 internship
 
+## linux unzip code - 220816
+- python 아니고 linux인 점 주의 <br>
+```bash
+unzip '~~~.zip' -d 'unzip한 file 저장할 path'
+```
+<br>
+
 ## 프린트 - 220809
 위워크 홈페이지 > print/download?/os=Windows > 프린트 프로그램 설치 <br>
 키카드만 탭하면 프린트 가능함. <br>
