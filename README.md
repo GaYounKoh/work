@@ -64,6 +64,15 @@ sorted(sklearn.metrics.SCORERS.keys())
 ```
 <br>
 
+## [df col to nonnull] - 220817
+df의 col 기준으로 nonnull 만들기 <br>
+```python
+dat = dat.drop(dat[dat.imgurl1.isnull()].index | dat[dat.imgurl2.isnull()].index)
+dat.to_csv('dat_nonnull.csv', index = False)
+```
+<br>
+
+
 ## [pymysql] - 220719
 [pymysql 사용법](https://www.fun-coding.org/mysql_basic6.html)
 - cursor의 fetchall()메서드는 모든 데이터를 한 번에 클라이언트로 가져올 때 사용됨.
@@ -239,7 +248,7 @@ with tf.device('/cpu:0'):
 from keras import models
 from keras import layers
 
-def build_model(): 동일한 모델을 여러 번 생성할 것이므로 함수를 만들어 사용합니다.
+def build_model(): # 동일한 모델을 여러 번 생성할 것이므로 함수를 만들어 사용합니다.
     model = models.Sequential()
     model.add(layers.Dense(64, activation='relu',
                            input_shape=(train_data.shape[1],)))
