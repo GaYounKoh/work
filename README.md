@@ -948,3 +948,64 @@ str_cid = [str(i) for i in tmp.cid] # tmp의 cid는 int, CIDs의 tmp는 str이�
 CIDs[~CIDs.cid.isin(str_cid)]
 ```
 <br>
+
+
+# 220921
+qr코드 생성을 위한 동적 크롤링 (서버에서 동적 크롤링 안되는게 아니었음. chromedriver가 문제였던 것임.) <br>
+chromedriver 파일 위치 찾음. (파일 위치 찾는 데에는 아래의 코드 이용, 모든 위치 반환, 그냥 상단에서 부터 하나씩 실행시켜봄. 위치는 dacon/Dacon/HDD_01/a.outmember/~~~였음.) <br>
+
+``` bash
+find -name 'chromedriver'
+```
+<br>
+
+[각종 selenium browser 열 때 설정, 창(window) 사이즈 등](https://incomeplus.tistory.com/266) <br>
+
+```python
+options = webdriver.ChromeOptions()
+options.add_argument('headless')
+options.add_argument('window-size=1920x1080')
+options.add_argument('diisable-gpu')
+
+driver = webdriver.Chrome('chromedriver', chrome_options = options)
+```
+<br>
+
+[브라우저 띄우지 않은 채로 크롤링 하기 (서버에서 실행하면 어차피 안뜸), 이거 설정하면 로컬에서는 일단 에러나서 사용 안하는 편이 좋겠음.](https://goodthings4me.tistory.com/196) <br>
+
+```python
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless') # 브라우저 안뜨게
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
+## webdriverChrome()할 때 options parameter에 chrome_options 변수 넣어주기
+driver = webdriver.Chrome('chromedriver', options = chrome_options)
+```
+<br>
+
+[.click()이 안먹힐 때](https://wkdtjsgur100.github.io/selenium-does-not-work-to-click/) <br>
+
+```python
+# 다음과 같이 시도해 보았다.
+driver.find_element_by_xpath("//form[@class='ui form']/button").click()
+## 아무리 해도 클릭이 되지 않음.
+
+## 그래서 is_enabled()를 사용해서 해당 엘리먼트가 클릭 가능한 지 테스트 해봤지만 True를 반환
+driver.find_element_by_xpath("//form[@class='ui form']/button").is_enabled()
+
+## 다음과 같이 해결
+from selenium.webdriver.common.keys import Keys
+driver.find_element_by_xpath("//form[@class='ui form']/button").send_keys(Keys.ENTER)
+
+
+## 만약 그래도 안된다면, 다음과 같은 명령문 사용
+element = driver.find_element_by_xpath("//form[@class='ui form']/button")
+driver.execute_script("arguments[0].click();", element)
+```
+<br>
+
+[webdriver 공식 doc](https://w3c.github.io/webdriver/#element-send-keys) <br>
+
+[selenium 공식 doc](https://www.selenium.dev/documentation/webdriver/elements/interactions/) <br>
+
