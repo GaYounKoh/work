@@ -1008,4 +1008,24 @@ driver.execute_script("arguments[0].click();", element)
 [webdriver 공식 doc](https://w3c.github.io/webdriver/#element-send-keys) <br>
 
 [selenium 공식 doc](https://www.selenium.dev/documentation/webdriver/elements/interactions/) <br>
+<br>
 
+# 220922
+- gridsearch에서 점수에 따른 모델 찾기
+
+```python
+gscv.cv_results_.keys()
+gscv.cv_results_['rank_test_score']
+gscv.cv_results_['mean_test_score']
+gscv.cv_results_['params']
+```
+<br>
+
+- markdown 수식 <br>
+$ X+Y=Z; $
+<br>
+
+[markdown](https://velog.io/@d2h10s/LaTex-Markdown-%EC%88%98%EC%8B%9D-%EC%9E%91%EC%84%B1%EB%B2%95)
+<br>
+[markdown 하이라이팅 지원 언어](https://github.com/jincheng9/markdown_supported_languages)
+<br>
