@@ -1029,3 +1029,7 @@ $ X+Y=Z; $
 <br>
 [markdown 하이라이팅 지원 언어](https://github.com/jincheng9/markdown_supported_languages)
 <br>
+
+# 220929, 목 - 보조강사 출장, 제주 테크노파크
+[folium 사용법 강의 - 송우석님](https://github.com/GaYounKoh/work/blob/main/%EC%A0%9C%EC%A3%BC%20%ED%85%8C%ED%81%AC%EB%85%B8%ED%8C%8C%ED%81%AC/220929%2C%20%EC%9A%B0%EC%84%9D%EB%8B%98%20%EA%B0%95%EC%9D%98%20folium.ipynb) <br>
+[plotly dash 사용 예시](https://dash.gallery/Portal/?_gl=1*1lqfull*_ga*NTE1OTMzMzI2LjE2NjQ0MTA3NTY.*_ga_6G7EE0JNSC*MTY2NDQyOTQzMi4yLjEuMTY2NDQyOTQzNC4wLjAuMA..) <br>
