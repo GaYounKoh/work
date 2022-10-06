@@ -1033,3 +1033,30 @@ $ X+Y=Z; $
 # 220929, 목 - 보조강사 출장, 제주 테크노파크
 [folium 사용법 강의 - 송우석님](https://github.com/GaYounKoh/work/blob/main/%EC%A0%9C%EC%A3%BC%20%ED%85%8C%ED%81%AC%EB%85%B8%ED%8C%8C%ED%81%AC/220929%2C%20%EC%9A%B0%EC%84%9D%EB%8B%98%20%EA%B0%95%EC%9D%98%20folium.ipynb) <br>
 [plotly dash 사용 예시](https://dash.gallery/Portal/?_gl=1*1lqfull*_ga*NTE1OTMzMzI2LjE2NjQ0MTA3NTY.*_ga_6G7EE0JNSC*MTY2NDQyOTQzMi4yLjEuMTY2NDQyOTQzNC4wLjAuMA..) <br>
+
+
+## 221006, 목
+[크롤링 에러 - 아마도 크롬 드라이버 버전이슈가 아닐까..., DeprecationWarning: executable_path has been deprecated, please pass in a Service object](https://velog.io/@kite_day/selenium-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0-%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%ED%81%AC%EB%A1%A4%EB%A7%81-%EC%98%A4%EB%A5%98) <br>
+
+
+
+[webdriver-manager official doc](https://pypi.org/project/webdriver-manager/) <br>
+[크롬 드라이버 실시간으로 설치하여 사용하기](https://liveyourit.tistory.com/14) <br>
+-> <b>웹 드라이버매니저 이용</b> <br>
+- <b>버전 변경에 상관없이 현재 OS에 설치된 크롬브라우저를 사용합니다.</b> <br>
+[크롤링 소소한 팁](https://pythonblog.co.kr/coding/7/) <br>
+[크롬 웹드라이버 사용해야하는 이유와 유의사항, 전체 코드](https://redfox.tistory.com/m/87) <br>
+- 유의사항 <br>
+기존 방식의 경우 웹드라이버 지정 과정에서만 브라우저 유형을 지정하는게 전부였지만, 웹드라이버 매니저의 경우 모듈 import(임포트) 과정에서부터 브라우저 유형을 지정해줘야해서 다소 귀찮아질 수 있다. <br>
+
+[크롬 웹드라이버 에러 관련 팁](https://www.codeit.kr/community/threads/22660) <br>
+```
+앞서 다른 분이 크롬 웹드라이버 임포트 할 때의 에러를 공유해 주신 것과 관련해서 저도 팁 하나 공유 드립니다.
+코드잇 측에서 포스팅 해주신 코드에서는 크롬 드라이버를 직접 다운 받아서 실행 시키는 정석적인 방법인데,
+(1) 드라이버 파일 경로를 잘못 지정하거나, (2) 드라이버 버전이 맞지 않아서 에러가 발생 할 수 있습니다. ( 저는 후자였습니다.)
+
+드라이버 재설치 혹은 경로 지정에 어려움을 겪는 경우, 아래와 같은 코드가 도움이 될 수 있어서 공유 드립니다. 아래와 같이 패키지 설치 하시고, 구문을 추가/대체 하시면 무난히 진행됩니다. ([출처](https://stackoverflow.com/questions/60296873/sessionnotcreatedexception-message-session-not-created-this-version-of-chrome))
+```
+<br>
+
+[최종 에러 Chrome failed to start: crashed 해결](https://league-cat.tistory.com/278) <br>
