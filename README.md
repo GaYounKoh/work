@@ -1065,3 +1065,14 @@ $ X+Y=Z; $
 ## 221011
 인증서 발급 자동화 프로세스 (크롤링 + pdf 위에 폰트)<br>
 EDA 프로세스 <br>
+
+[TOC 생성 코드](https://gmnam.tistory.com/246) <br>
+``` markdown
+핵심 프로세스
+- header text옆에 a tag 추가
+- class는 anchor로 고정
+- TOC 생성에 이용할 유니크한 id 생성
+
+아래는 예시
+<a class="anchor" id="chapter1"></a>
+```
