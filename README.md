@@ -1060,3 +1060,8 @@ $ X+Y=Z; $
 <br>
 
 [최종 에러 Chrome failed to start: crashed 해결](https://league-cat.tistory.com/278) <br>
+
+
+## 221011
+인증서 발급 자동화 프로세스 (크롤링 + pdf 위에 폰트)<br>
+EDA 프로세스 <br>
