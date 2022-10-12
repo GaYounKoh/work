@@ -1076,3 +1076,13 @@ EDA 프로세스 <br>
 아래는 예시
 <a class="anchor" id="chapter1"></a>
 ```
+
+<br>
+
+## 221012
+spline smoothing (스플라인 스무딩)
+데이터에 대해 곡선을 적합시키는 작업 https://cdm98.tistory.com/27 <br>
+
+동일한 정보를 제공해준다면 더욱 간단한 모델을 사용하는 것이 더욱 효율적 <br>
+
+자유도가 낮을 수록 간단한 모델인 것? <br>
