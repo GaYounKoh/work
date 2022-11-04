@@ -1,4 +1,4 @@
 ## ignore file ##
 
-torch/CustomDataset(custom_Func).jpg
-torch/DataLoader(torch_own_Func).jpg
+# torch/CustomDataset(custom_Func).jpg
+# torch/DataLoader(torch_own_Func).jpg
