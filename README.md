@@ -1086,3 +1086,16 @@ spline smoothing (스플라인 스무딩)
 동일한 정보를 제공해준다면 더욱 간단한 모델을 사용하는 것이 더욱 효율적 <br>
 
 자유도가 낮을 수록 간단한 모델인 것? <br>
+
+
+## 221107
+null인 값이 들어있는 열 찾기
+```python
+idx = np.where(df.isnull().sum())
+df.columns[idx]
+```
+
+null인 값이 들어있는 행 찾기 (특정 열 줘야 할 수 있음., 위와 이어지는 코드임.)
+```python
+np.where(df[df.columns[idx]].isnull())
+```
