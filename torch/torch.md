@@ -40,7 +40,7 @@ train_loader = DataLoader(train_dataset, batch_size = CFG['BATCH_SIZE'], shuffle
 ```
 <br>
 
-<img src="./general_CustomDataset.png" width="960px" height="600px" title="DataLoader(torch_own_Func)"/>
+<img src="./general_CustomDataset.png" width="1000px" height="500px" title="DataLoader(torch_own_Func)"/>
 
 [.md img 삽입](https://dlee0129.tistory.com/46) <br>
 [gitingore](https://nesoy.github.io/articles/2017-01/Git-Ignore) <br>
