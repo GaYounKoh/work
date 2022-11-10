@@ -13,7 +13,7 @@
   <figcaption align="center">CustomDataset | DataLoader</figcaption>
 </p>
 
-# 가장 일반적인 CustomDataset code
+## 가장 일반적인 CustomDataset code
 ```python
 class CustomDataset(Dataset):
     def __init__(self, X, Y):
@@ -40,7 +40,7 @@ train_loader = DataLoader(train_dataset, batch_size = CFG['BATCH_SIZE'], shuffle
 ```
 <br>
 
-<img src="./general_CustomDataset.png" width="600px" height="600px" title="DataLoader(torch_own_Func)"/>
+<img src="./general_CustomDataset.png" width="960px" height="600px" title="DataLoader(torch_own_Func)"/>
 
 [.md img 삽입](https://dlee0129.tistory.com/46) <br>
 [gitingore](https://nesoy.github.io/articles/2017-01/Git-Ignore) <br>
