@@ -1106,3 +1106,7 @@ null인 값이 들어있는 행 찾기 (특정 열 줘야 할 수 있음., 위�
 ```python
 np.where(df[df.columns[idx]].isnull())
 ```
+
+## 221130
+[tensorflow에서 GPU를 사용하지 않을 때 해결 방법](https://imloil.tistory.com/entry/%ED%85%90%EC%84%9C%ED%94%8C%EB%A1%9C%EC%9A%B0Tensorflow%EC%97%90%EC%84%9C-GPU%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C) <br>
+[시계열 데이터 예측 모델 비교](https://hwao-story.tistory.com/15) <br>
